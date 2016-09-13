@@ -28,7 +28,6 @@ module.exports = {
     loaders: [
       {
         test: /\.jsx?$/,
-        // Make sure to formidable-landers is excluded for `npm link` purposes
         include: [
           path.resolve(SRC)
         ],
