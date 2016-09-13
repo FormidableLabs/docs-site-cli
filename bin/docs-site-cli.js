@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 "use strict";
-const { docsDir, siteDir, templateDir } = require("../config/config");
+const { docsFolder, siteFolder, outputFolder } = require("../config/config");
 
-const fs = require("fs");
+const path = require("path");
+const fs = require("fs-extra");
 const commander = require("commander");
 const spawn = require("cross-spawn");
 const copyTemplate = require("../lib/copy-template");
@@ -22,29 +23,57 @@ if (program.rawArgs.length < 1) {
   return;
 }
 
+const folderExists = (folder) => {
+  const folderPath = path.join(process.cwd(), folder);
+  return fs.existsSync(folderPath);
+};
+
+const removeFolder = (folder) => {
+  const folderPath = path.join(process.cwd(), folder);
+  return fs.removeSync(folderPath);
+};
+
 /**
  * Create new docs scaffolding
+ * Copy the template into the current directory if it doesnt already exist
  */
 if (program.new) {
-  if (!fs.existsSync(docsDir) && !fs.existsSync(siteDir)) {
-    copyTemplate(templateDir, process.cwd());
-
+  if (folderExists(docsFolder) || folderExists(siteFolder)) {
+    console.log("Error! The /docs or /site-docs directory already exists!");
     return;
   }
 
-  console.log("Error! The /docs or /site-docs directory already exists!");
+  copyTemplate(path.join(__dirname, "../template"), process.cwd());
 }
 
-/**
- * Build the docs
- */
 if (program.build) {
-  // We need to run webpack from the cli's __dirname, as we take a dep on webpack
-  // Webpack will compile the files in /docs-site in the cwd
-  const child = spawn("webpack", [], {
-    stdio: "inherit",
+  const env = process.env;
+  env.TARGET = process.cwd();
+
+  // clean the output dir
+  if (folderExists(outputFolder)) {
+    removeFolder(outputFolder);
+  }
+
+  // run build script, passing cwd as env var
+  const child = spawn("npm", ["run", "build"], {
+    cwd: path.resolve(__dirname),
+    stdio: [null, null, null, null],
     detached: true,
-    cwd: __dirname
+    env
+  });
+
+  // @TODO improve output
+  child.stdout.on("data", (data) => {
+    console.log(`stdout: ${data}`);
+  });
+
+  child.stderr.on("data", (data) => {
+    console.log(`stderr: ${data}`);
+  });
+
+  child.on("close", (code) => {
+    console.log(`Webpack compile finished with with code ${code}`);
   });
 
 }

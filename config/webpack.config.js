@@ -2,24 +2,26 @@
 
 const path = require("path");
 const webpack = require("webpack");
-
 const StaticSiteGeneratorPlugin = require("static-site-generator-webpack-plugin");
 
-const { siteDir, outputDir } = require("../config/config");
+const { siteFolder, outputFolder } = require("../config/config");
 
-// All routes we want to static-render:
-const routes = require(path.join(siteDir, "static-routes"));
+const NODE_MODULES = path.join(process.cwd(), "./node_modules");
+const ROOT = process.env.TARGET;
+const SRC = path.join(ROOT, siteFolder);
+const staticRoutes = require(path.join(SRC, "./static-routes.js"));
 
 module.exports = {
   entry: {
-    main: [path.join(siteDir, "./index.js")]
+    main: [path.join(SRC, "./index.js")]
   },
   output: {
-    path: outputDir,
+    path: path.join(ROOT, outputFolder),
     filename: "main.[hash].js",
     libraryTarget: "umd" // Needs to be universal for `static-site-generator-webpack-plugin` to work
   },
   resolve: {
+    modulesDirectories: [NODE_MODULES],
     extensions: ["", ".js", ".jsx", ".json"]
   },
   module: {
@@ -28,11 +30,15 @@ module.exports = {
         test: /\.jsx?$/,
         // Make sure to formidable-landers is excluded for `npm link` purposes
         include: [
-          path.resolve(siteDir)
+          path.resolve(SRC)
         ],
         loader: require.resolve("babel-loader"),
         query: {
-          presets: ["es2015", "stage-1", "react"]
+          presets: [
+            require.resolve("babel-preset-es2015"),
+            require.resolve("babel-preset-stage-1"),
+            require.resolve("babel-preset-react")
+          ]
         }
       }, {
         test: /.svg$/,
@@ -59,7 +65,7 @@ module.exports = {
         warnings: false
       }
     }),
-    new StaticSiteGeneratorPlugin("main", routes, null, {
+    new StaticSiteGeneratorPlugin("main", staticRoutes, null, {
       // Shim browser globals.
       window: {
         // Optional client-side render checks whether document is undefined

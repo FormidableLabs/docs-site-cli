@@ -1,4 +1,4 @@
-# Generate Docs Site
+# docs-site-cli
 This CLI adds the scaffolding to an existing project to generate static docs sites.
 
 ## Installation & Usage
@@ -6,20 +6,17 @@ This CLI adds the scaffolding to an existing project to generate static docs sit
 npm install -g docs-site-cli
 
 cd my-project
-$ docs-site-cli new [project-name] //create new docs scaffolding
-$ docs-site-cli build [options] //build the docs into a static site
-
+$ docs-site-cli new
+$ docs-site-cli build
 ```
 
 ## Commands
 ```
-new [project-name]       creates new docs-site scaffolding
-build [options]          creates a build
+new                 creates new docs-site scaffolding
+build               creates a build
 
--h, --help               show usage information
--v, --version            version number
--o [dir], --out [dir]    specify output directory. Automatically outputs to `/docs-dist`
-
+-h, --help          show usage information
+-v, --version       version number
 ```
 
 ## Structure
