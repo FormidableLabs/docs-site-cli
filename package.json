@@ -24,6 +24,8 @@
     "handlebars-loader": "^1.4.0",
     "image-webpack-loader": "^2.0.0",
     "json-loader": "^0.5.4",
+    "lodash": "^4.15.0",
+    "markdown-it": "^7.0.1",
     "raw-loader": "^0.5.1",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",

@@ -5,9 +5,12 @@ import { renderToString } from "react-dom/server";
 import index from "./index.hbs";
 import Template from "./template";
 
+// Data provided by webpack
+const docs = DOCFILES; //eslint-disable-line no-undef
+
 if (typeof window !== "undefined" && window.__STATIC_GENERATOR !== true) {
   render(
-    <Template />,
+    <Template docs={docs} />,
     document.getElementById("content")
   );
 }
@@ -16,7 +19,7 @@ if (typeof window !== "undefined" && window.__STATIC_GENERATOR !== true) {
 export default (locals, callback) => {
   callback(
     null, index({
-      content: renderToString(<Template />),
+      content: renderToString(<Template docs={docs} />),
       bundleJs: locals.assets.main
     }));
 };

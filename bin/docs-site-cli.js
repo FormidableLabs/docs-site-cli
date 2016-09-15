@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 "use strict";
-const { docsFolder, siteFolder, outputFolder } = require("../config/config");
-
 const path = require("path");
-const fs = require("fs-extra");
 const commander = require("commander");
-const spawn = require("cross-spawn");
+
+const { docsFolder, siteFolder, outputFolder } = require("../config/config");
+const { folderExists, removeFolder } = require("../lib/util");
 const copyTemplate = require("../lib/copy-template");
+const webpackBuild = require("../lib/webpack-build");
+const createDocs = require("../lib/create-docs");
 const pkg = require("../package.json");
 
 const program = new commander.Command("docs-site-cli");
@@ -23,16 +24,6 @@ if (program.rawArgs.length < 1) {
   return;
 }
 
-const folderExists = (folder) => {
-  const folderPath = path.join(process.cwd(), folder);
-  return fs.existsSync(folderPath);
-};
-
-const removeFolder = (folder) => {
-  const folderPath = path.join(process.cwd(), folder);
-  return fs.removeSync(folderPath);
-};
-
 /**
  * Create new docs scaffolding
  * Copy the template into the current directory if it doesnt already exist
@@ -47,33 +38,12 @@ if (program.new) {
 }
 
 if (program.build) {
-  const env = process.env;
-  env.TARGET = process.cwd();
-
   // clean the output dir
   if (folderExists(outputFolder)) {
     removeFolder(outputFolder);
   }
 
-  // run build script, passing cwd as env var
-  const child = spawn("npm", ["run", "build"], {
-    cwd: path.resolve(__dirname),
-    stdio: [null, null, null, null],
-    detached: true,
-    env
+  createDocs(path.join(process.cwd(), docsFolder)).then((docs) => {
+    webpackBuild(docs);
   });
-
-  // @TODO improve output
-  child.stdout.on("data", (data) => {
-    console.log(`stdout: ${data}`);
-  });
-
-  child.stderr.on("data", (data) => {
-    console.log(`stderr: ${data}`);
-  });
-
-  child.on("close", (code) => {
-    console.log(`Webpack compile finished with with code ${code}`);
-  });
-
 }
