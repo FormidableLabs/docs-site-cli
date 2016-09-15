@@ -24,10 +24,8 @@ The `docs-site-cli` cli will add these directories to your project. If they alre
 ```
 /docs
   index.md
-  /example-page
-    index.md
-  /example-page-2
-    index.md
+  example-page.md
+  example-page-2.md
 /docs-site
   index.js
   template.js
