@@ -2,14 +2,12 @@
 
 const path = require("path");
 const webpack = require("webpack");
-const StaticSiteGeneratorPlugin = require("static-site-generator-webpack-plugin");
 
 const { siteFolder, outputFolder } = require("../config/config");
 
 const NODE_MODULES = path.join(process.cwd(), "./node_modules");
 const ROOT = process.env.TARGET;
 const SRC = path.join(ROOT, siteFolder);
-const staticRoutes = require(path.join(SRC, "./static-routes.js"));
 
 module.exports = {
   entry: {
@@ -63,20 +61,6 @@ module.exports = {
         NODE_ENV: JSON.stringify("production")
       },
       "DOCFILES": process.env.DOCS
-    }),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    }),
-    new StaticSiteGeneratorPlugin("main", staticRoutes, null, {
-      // Shim browser globals.
-      window: {
-        // Optional client-side render checks whether document is undefined
-        // instead check whether it's being shimmed
-        __STATIC_GENERATOR: true
-      }
     })
   ]
 };

@@ -5,7 +5,7 @@ import Sidebar from "./components/sidebar";
 import Markdown from "./components/markdown";
 
 const Template = ({ docs }) => {
-  const kitchenSink = find(docs, { fileName: "kitchen-sink.md" });
+  const kitchenSink = find(docs, { route: "kitchen-sink" });
   return (
     <div id="app">
       <Sidebar docs={docs} />
