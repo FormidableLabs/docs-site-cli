@@ -1,9 +1,6 @@
 "use strict";
-
 const path = require("path");
-const webpack = require("webpack");
-
-const { siteFolder, outputFolder } = require("../config/config");
+const { siteFolder } = require("../config/config");
 
 const NODE_MODULES = path.join(process.cwd(), "./node_modules");
 const ROOT = process.env.TARGET;
@@ -12,11 +9,6 @@ const SRC = path.join(ROOT, siteFolder);
 module.exports = {
   entry: {
     main: [path.join(SRC, "./index.js")]
-  },
-  output: {
-    path: path.join(ROOT, outputFolder),
-    filename: "main.[hash].js",
-    libraryTarget: "umd" // Needs to be universal for `static-site-generator-webpack-plugin` to work
   },
   resolve: {
     modulesDirectories: [NODE_MODULES],
@@ -54,13 +46,5 @@ module.exports = {
         loader: require.resolve("json-loader")
       }
     ]
-  },
-  plugins: [
-    new webpack.DefinePlugin({
-      "process.env": {
-        NODE_ENV: JSON.stringify("production")
-      },
-      "DOCFILES": process.env.DOCS
-    })
-  ]
+  }
 };
