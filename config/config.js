@@ -2,5 +2,6 @@
 module.exports = {
   docsFolder: "/docs",
   siteFolder: "/docs-site",
-  outputFolder: "/docs-dist"
+  outputFolder: "/docs-dist",
+  ga: ""
 };

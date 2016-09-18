@@ -1,16 +1,16 @@
 import React, { PropTypes } from "react";
+import { Link } from "react-router";
 import { map } from "lodash";
 
 const Sidebar = ({ docs }) => (
-  <div>{map((docs), (item, i) => (
-    <div key={i}>{item.fileName}</div>
-  ))}</div>
+  <ul>{map((docs), (item, i) => (
+    <li key={i}><Link to={item.route}>{item.route}</Link></li>
+  ))}</ul>
 );
 
 Sidebar.propTypes = {
   docs: PropTypes.arrayOf(PropTypes.shape({
-    filename: PropTypes.string,
-    md: PropTypes.string
+    route: PropTypes.string
   })).isRequired
 };
 

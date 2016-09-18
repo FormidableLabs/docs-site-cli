@@ -1,23 +1,36 @@
-import React, { PropTypes } from "react";
-import { find } from "lodash";
+import React, { PropTypes, Component } from "react";
+import Typography from "typography";
 
 import Sidebar from "./components/sidebar";
-import Markdown from "./components/markdown";
+require("./style.css");
 
-const Template = ({ docs }) => {
-  const kitchenSink = find(docs, { route: "kitchen-sink" });
-  return (
-    <div id="app">
-      <Sidebar docs={docs} />
-      <main>
-        <Markdown markdown={kitchenSink.md} />
-      </main>
-    </div>
-  );
-};
+const typography = new Typography({
+  baseFontSize: "18px",
+  baseLineHeight: "30px",
+  headerFontFamily: ["Avenir Next", "Helvetica Neue", "Segoe UI", "Helvetica", "Arial", "sans-serif"], // eslint-disable-line max-len
+  bodyFontFamily: ["Georgia", "serif"]
+});
+
+// Data provided by webpack
+const DOCS = DOCFILES; //eslint-disable-line no-undef
+
+class Template extends Component {
+  componentWillMount() {
+    typography.injectStyles();
+  }
+
+  render() {
+    return (
+      <div id="app">
+        <Sidebar docs={DOCS} />
+        {this.props.children}
+      </div>
+    );
+  }
+}
 
 Template.propTypes = {
-  docs: PropTypes.array.isRequired
+  children: PropTypes.node.isRequired
 };
 
 export default Template;

@@ -22,7 +22,18 @@ module.exports = {
   devtool: "source-map",
   entry: base.entry,
   resolve: base.resolve,
-  module: base.module,
+  module: {
+    loaders: base.module.loaders.concat([
+      {
+        test: /\.css$/,
+        loaders: [
+          require.resolve("style-loader"),
+          require.resolve("css-loader"),
+          require.resolve("postcss-loader")
+        ]
+      }
+    ])
+  },
   plugins: [
     new webpack.DefinePlugin({
       "process.env": {

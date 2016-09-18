@@ -11,8 +11,11 @@ module.exports = {
     main: [path.join(SRC, "./index.js")]
   },
   resolve: {
+    alias: {
+      config: path.join(process.cwd(), "./config/config")
+    },
     modulesDirectories: [NODE_MODULES],
-    extensions: ["", ".js", ".jsx", ".json"]
+    extensions: ["", ".js", ".jsx", ".json", ".css", ".svg"]
   },
   module: {
     loaders: [

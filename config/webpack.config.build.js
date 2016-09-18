@@ -2,6 +2,9 @@
 const path = require("path");
 const webpack = require("webpack");
 const StaticSiteGeneratorPlugin = require("static-site-generator-webpack-plugin");
+const postcssImport = require("postcss-import");
+const postcssnext = require("postcss-cssnext");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const { outputFolder } = require("../config/config");
 const base = require("./webpack.config.base");
@@ -17,7 +20,24 @@ module.exports = {
     libraryTarget: "umd" // Needs to be universal for `static-site-generator-webpack-plugin` to work
   },
   resolve: base.resolve,
-  module: base.module,
+  module: {
+    loaders: base.module.loaders.concat([
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract(
+          require.resolve("style-loader"),
+          // yep. these 2 loaders need to resolve together first
+          [ require.resolve("css-loader"), require.resolve("postcss-loader") ]
+        )
+      }
+    ])
+  },
+  postcss: (webpack) => { //eslint-disable-line no-shadow
+    return [
+      postcssImport({ addDependencyTo: webpack }),
+      postcssnext
+    ];
+  },
   plugins: [
     new webpack.DefinePlugin({
       "process.env": {
@@ -25,6 +45,7 @@ module.exports = {
       },
       "DOCFILES": process.env.DOCS
     }),
+    new ExtractTextPlugin("styles.css"),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
