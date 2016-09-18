@@ -34,6 +34,7 @@ module.exports = {
       }
     ])
   },
+  postcss: base.postcss,
   plugins: [
     new webpack.DefinePlugin({
       "process.env": {

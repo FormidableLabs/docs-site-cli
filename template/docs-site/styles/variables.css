@@ -1,0 +1,20 @@
+:root {
+  /* Fonts */
+  --sans-serif: system, -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
+  --serif: Georgia, serif;
+  --code: Consolas,"Roboto Mono","LiberationMono",Menlo,Courier,monospace;
+
+  --font-size: 1rem;
+
+  /* Colors */
+  --primary: #c43a31;
+  --white: #fff;
+  --black: #242121;
+  --gray: #4a4a4a;
+  --lightgray: #eee;
+  --offWhite: #f5f2f0;
+
+  /* Layout */
+  --container: "43.13em";
+  --gutter: "1.2em";
+}

@@ -3,9 +3,13 @@ import { Link } from "react-router";
 import { map } from "lodash";
 
 const Sidebar = ({ docs }) => (
-  <ul>{map((docs), (item, i) => (
-    <li key={i}><Link to={item.route}>{item.title}</Link></li>
-  ))}</ul>
+  <aside className="side-menu">
+    <menu role="menu">
+      {map((docs), (item, i) => (
+        <li key={i}><Link to={item.route}>{item.title}</Link></li>
+      ))}
+    </menu>
+  </aside>
 );
 
 Sidebar.propTypes = {

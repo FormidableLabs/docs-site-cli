@@ -1,6 +1,8 @@
 "use strict";
 const path = require("path");
 const { siteFolder } = require("../config/config");
+const postcssImport = require("postcss-import");
+const postcssnext = require("postcss-cssnext");
 
 const NODE_MODULES = path.join(process.cwd(), "./node_modules");
 const ROOT = process.env.TARGET;
@@ -49,5 +51,11 @@ module.exports = {
         loader: require.resolve("json-loader")
       }
     ]
+  },
+  postcss: (webpack) => { //eslint-disable-line no-shadow
+    return [
+      postcssImport({ addDependencyTo: webpack }),
+      postcssnext
+    ];
   }
 };

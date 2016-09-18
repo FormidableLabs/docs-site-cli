@@ -2,8 +2,6 @@
 const path = require("path");
 const webpack = require("webpack");
 const StaticSiteGeneratorPlugin = require("static-site-generator-webpack-plugin");
-const postcssImport = require("postcss-import");
-const postcssnext = require("postcss-cssnext");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const { outputFolder } = require("../config/config");
@@ -32,12 +30,7 @@ module.exports = {
       }
     ])
   },
-  postcss: (webpack) => { //eslint-disable-line no-shadow
-    return [
-      postcssImport({ addDependencyTo: webpack }),
-      postcssnext
-    ];
-  },
+  postcss: base.postcss,
   plugins: [
     new webpack.DefinePlugin({
       "process.env": {

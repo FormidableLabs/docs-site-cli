@@ -1,0 +1,186 @@
+:root {
+  --typography-margin-bottom: 1.4rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--black);
+  font-family: var(--sans-serif);
+  text-rendering: optimizeLegibility;
+  margin-bottom: var(--typography-margin-bottom);
+}
+
+h1 {
+  font-size: 2.2rem;
+  line-height: 2.8rem;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 1.6rem;
+  line-height: 2.1rem;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 1.4rem;
+  line-height: 2.1rem;
+  font-weight: bold;
+}
+
+h4 {
+  font-size: 1.2rem;
+  line-height: 1.4rem;
+  font-weight: bold;
+}
+
+h5 {
+  font-size: 1rem;
+  line-height: 1.4rem;
+  font-weight: bold;
+}
+
+h6 {
+  font-size: 1rem;
+  line-height: 1rem;
+}
+
+p {
+  margin-bottom: var(--typography-margin-bottom);
+}
+
+figure {
+  margin: 0 0 var(--typography-margin-bottom);
+  padding: 0;
+}
+
+pre {
+  margin: 0 0 var(--typography-margin-bottom);
+  padding: var(--typography-margin-bottom);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  background: color(var(--gray) alpha(.08));
+  border-radius: 3px;
+  overflow: auto;
+}
+
+table {
+  margin: 0 0 var(--typography-margin-bottom);
+  padding: 0;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+fieldset {
+  margin: 0 0 var(--typography-margin-bottom);
+  padding: 0;
+}
+
+blockquote {
+  margin: 0 var(--typography-margin-bottom) var(--typography-margin-bottom);
+  padding: 0;
+}
+
+form {
+  margin: 0 0 var(--typography-margin-bottom);
+  padding: 0;
+}
+
+hr {
+  margin: 0 0 calc(var(--typography-margin-bottom) - 1px));
+  padding: 0;
+  background: color(var(--gray) alpha(.08));
+  border: none;
+  height: 1px;
+}
+
+pre code {
+  background: none;
+  line-height: 1.42;
+}
+
+tt,
+code {
+  background-color: color(var(--gray) alpha(.08));
+  border-radius: 3px;
+  font-family: var(--code);
+  padding: 0;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+}
+
+code:before,
+code:after,
+tt:before,
+tt:after {
+  letter-spacing: -0.2em;
+  content: " ";
+}
+
+pre code:before,
+pre code:after,
+pre tt:before,
+pre tt:after {
+  content: "";
+}
+
+b {
+  font-weight: bold;
+}
+
+strong {
+  font-weight: bold;
+}
+
+dt {
+  font-weight: bold;
+}
+
+th {
+  font-weight: bold;
+}
+
+li {
+  margin-bottom: calc(1.5rem / 2);
+}
+
+ol li {
+  padding-left: 0;
+}
+
+ul li {
+  padding-left: 0;
+}
+
+li > ol {
+  margin-left: 1.5rem;
+  margin-bottom: calc(1.5rem / 2);
+  margin-top: calc(1.5rem / 2);
+}
+
+li > ul {
+  margin-left: 1.5rem;
+  margin-bottom: calc(1.5rem / 2);
+  margin-top: calc(1.5rem / 2);
+}
+
+code {
+  font-size: 0.85rem;
+  line-height: 1.5rem;
+}
+
+kbd {
+  font-size: 0.85rem;
+  line-height: 1.5rem;
+}
+
+samp {
+  font-size: 0.85rem;
+  line-height: 1.5rem;
+}

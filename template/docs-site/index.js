@@ -8,6 +8,8 @@ import ReactGA from "react-ga";
 import { ga } from "config";
 import index from "./index.hbs";
 import routes from "./routes";
+import "reset.css";
+import "./styles/app.css";
 
 if (typeof window !== "undefined" && window.__STATIC_GENERATOR !== true) { //eslint-disable-line no-undef, max-len
   // Add Google Analytics tracking for each page

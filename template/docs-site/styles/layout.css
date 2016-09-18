@@ -1,0 +1,7 @@
+.application {
+  display: flex;
+}
+
+.side-menu {
+  flex: 0 0 250px;
+}

@@ -2,7 +2,7 @@ import React from "react";
 import { Route, IndexRoute } from "react-router";
 
 // Components
-import Template from "./template";
+import Template from "./components/template";
 import Page from "./components/page";
 
 module.exports = (
