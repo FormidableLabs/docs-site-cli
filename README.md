@@ -3,10 +3,11 @@ This CLI adds the scaffolding to an existing project to generate static docs sit
 
 ## Installation & Usage
 ```
-npm install -g docs-site-cli
+$ npm install -g docs-site-cli
 
-cd my-project
+$ cd my-project
 $ docs-site-cli new
+$ docs-site-cli dev
 $ docs-site-cli build
 ```
 
@@ -14,6 +15,7 @@ $ docs-site-cli build
 ```
 new                 creates new docs-site scaffolding
 build               creates a build
+dev                 start the development server (no hot-loading yet)
 
 -h, --help          show usage information
 -v, --version       version number
@@ -27,6 +29,7 @@ The `docs-site-cli` cli will add these directories to your project. If they alre
   example-page.md
   example-page-2.md
 /docs-site
+  /components
   index.js
   template.js
 ```
@@ -43,4 +46,3 @@ Default template:
 
 - Support `playground`
 - Support `react-component`
-- Use markdown.it
