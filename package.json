@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --config config/webpack.config.build.js -p --progress --bail",
-    "dev": "webpack-dev-server --port 3000 --config config/webpack.config.dev.js --history-api-fallback",
+    "dev": "webpack-dev-server --port 3006 --config config/webpack.config.dev.js --history-api-fallback",
     "lint": "eslint --ext .js bin lib config template",
     "test": "npm run lint"
   },

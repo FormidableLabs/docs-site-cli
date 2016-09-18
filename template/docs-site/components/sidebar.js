@@ -4,13 +4,14 @@ import { map } from "lodash";
 
 const Sidebar = ({ docs }) => (
   <ul>{map((docs), (item, i) => (
-    <li key={i}><Link to={item.route}>{item.route}</Link></li>
+    <li key={i}><Link to={item.route}>{item.title}</Link></li>
   ))}</ul>
 );
 
 Sidebar.propTypes = {
   docs: PropTypes.arrayOf(PropTypes.shape({
-    route: PropTypes.string
+    route: PropTypes.string,
+    title: PropTypes.string
   })).isRequired
 };
 

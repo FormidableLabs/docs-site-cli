@@ -1,3 +1,8 @@
+---
+title: Kitchen Sink
+description: All the things
+---
+
 [View raw (TEST.md)](https://raw.github.com/adamschwartz/github-markdown-kitchen-sink/master/README.md)
 
 This is a paragraph.

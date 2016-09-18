@@ -13,7 +13,7 @@ const Page = ({ location }) => {
 
   return (
     <main>
-      <Markdown markdown={currentDoc.md} />
+      <Markdown markdown={currentDoc.markdown} />
     </main>
   );
 };
